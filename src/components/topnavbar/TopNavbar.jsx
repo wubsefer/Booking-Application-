@@ -8,15 +8,15 @@ const TopNavbar = () => {
         <div className="topNavbar">
             <div className="topNavContainer">
                 <div className="topNavItem">
-                    <FontAwesomeIcon icon={faMailBulk} />
-                    <span className="topNavText">+251 922 44 9047</span>
-                    <FontAwesomeIcon icon={faMessage} />
+                    <FontAwesomeIcon icon={faMailBulk} className="topbarIcon" />
+                    <span className="topNavText">info@etbooking.com</span>
+                    <FontAwesomeIcon icon={faMessage} className="topbarIcon" />
                     <span className="topNavText">+251 922 44 9047</span>
                 </div>
                 <div className="topNavItem">
-                    <FontAwesomeIcon icon={faClock } />
+                    <FontAwesomeIcon icon={faClock } className="topbarIcon" />
                     <span className="topNavText">Office Hour 08:00am - 6:00pm</span>
-                    <button className="topNavButton">Contact Us</button>
+                    <button  type="button" className="topNavButton">Contact Us</button>
                 </div>
             </div>
         </div>
