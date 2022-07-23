@@ -24,12 +24,22 @@ const Header = () => {
       key: "selection",
     },
   ]);
+
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
     room: 1,
   });
+
+  const handleOption = (name, operation) => {
+    setOptions((prev) => {
+      return {
+        ...prev,
+        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+      };
+    });
+  };
 
   return (
     <div className="header">
@@ -90,37 +100,72 @@ const Header = () => {
           </div>
           <div className="headerSearchItem">
             <FontAwesomeIcon icon={faPerson} className="headerIcon" />
-            <span className="headerSearchText">{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
-            <div className="options">
+            <span onClick={() => setOpenOptions(!openOptions)} className="headerSearchText">{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
+            { openOptions && <div className="options">
               <div className="optionsItem">
                 <span className="optionText">Adult</span>
-                <div className="optionsCounter">
-                  <button className="optionCounterbtn">-</button>
-                  <span className="optioncounterNumber">1</span>
-                  <button className="optionCounterbtn">+</button>
+                <div className="optionCounter">
+                  <button
+                    disabled={options.adult <=1}
+                    className="optionCounterbtn"
+                    onClick={() => handleOption("adult", "d")}
+                  >
+                    -
+                  </button>
+                  <span className="optioncounterNumber">{options.adult}</span>
+                  <button
+                    className="optionCounterbtn"
+                    onClick={() => handleOption("adult", "i")}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
               <div className="optionsItem">
                 <span className="optionText">Children</span>
                 <div className="optionCounter">
-                  <button className="optionCounterbtn">-</button>
-                  <span className="optioncounterNumber">0</span>
-                  <button className="optionCounterbtn">+</button>
+                  <button
+                    disabled={options.children <=0}
+                    className="optionCounterbtn"
+                    onClick={() => handleOption("children", "d")}
+                  >
+                    -
+                  </button>
+                  <span className="optioncounterNumber">
+                    {options.children}
+                  </span>
+                  <button
+                    className="optionCounterbtn"
+                    onClick={() => handleOption("children", "i")}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
               <div className="optionsItem">
                 <span className="optionText">Room</span>
                 <div className="optionCounter">
-                  <button className="optionCounterbtn">-</button>
-                  <span className="optioncounterNumber">1</span>
-                  <button className="optionCounterbtn">+</button>
+                  <button
+                    disabled={options.room <=1}
+                    className="optionCounterbtn"
+                    onClick={() => handleOption("room", "d")}
+                  >
+                    -
+                  </button>
+                  <span className="optioncounterNumber">{options.room}</span>
+                  <button
+                    className="optionCounterbtn"
+                    onClick={() => handleOption("room", "i")}
+                  >
+                    +
+                  </button>
                 </div>
               </div>
-            </div>
+            </div>}
           </div>
-        </div>
-        <div className="headerSearchItem">
-          <button className="headerSearchItemBtn">Search</button>
+          <div className="headerSearchItem">
+            <button className="headerSearchItemBtn">Search</button>
+          </div>
         </div>
       </div>
     </div>
